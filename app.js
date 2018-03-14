@@ -45,7 +45,7 @@ client.on("message", message => {
 		var links = content.match(exhentaiREG);
 
 		for(var i = 0; i < links.length; i++){
-			exhentaiChannel.send(links[i]);
+			exhentaiChannel.send(message.author + " sent a link: " + links[i]);
 		}
 
 		return;
@@ -55,7 +55,7 @@ client.on("message", message => {
 		var links = content.match(pixivREG);
 
 		for(var i = 0; i < links.length; i++){
-			pixivChannel.send(links[i]);
+			pixivChannel.send(message.author + " sent a link: " + links[i]);
 		}
 
 		return;
@@ -65,7 +65,7 @@ client.on("message", message => {
 		var links = content.match(twitterREG);
 
 		for(var i = 0; i < links.length; i++){
-			twitterChannel.send(links[i]);
+			twitterChannel.send(message.author + " sent a link: " + links[i]);
 		}
 
 		return;
@@ -75,7 +75,7 @@ client.on("message", message => {
 		var links = content.match(youtubeREG);
 
 		for(var i = 0; i < links.length; i++){
-			youtubeChannel.send(links[i]);
+			youtubeChannel.send(message.author + " sent a link: " + links[i]);
 		}
 
 		return;
