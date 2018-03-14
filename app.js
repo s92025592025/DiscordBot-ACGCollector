@@ -21,7 +21,49 @@ client.on("ready", () => {
 client.on("message", message => {
 	if(message.author.bot) return;
 
-	var testing = message.content;
+	var content = message.content;
 
-	message.channel.send("U've said: " + testing);
+	// regex for exhentai
+	var exhentaiREG = /https:\/\/exhentai\.org\/\g\/[0-9]+\/[0-9a-z]+\/(\?p=[0-9]+)?/g;
+	// regex for pixiv
+	var pixivREG = /https:\/\/www\.pixiv\.net\/member_illust\.php\?mode=medium&illust_id=[0-9]+/g;
+	// regex for twitter
+	var twitterREG = /https:\/\/twitter\.com\/[a-zA-z0-9]+\/status\/[0-9]+/g;
+
+	
+	var exhentaiChannel = client.channels.get("423287490384887828");
+	var pixivChannel = client.channels.get("423287514049019906");
+	var twitterChannel = client.channels.get("423287551386976256");
+	var picChannel = client.channels.get("423287762314330162");
+
+
+	if(exhentaiREG.test(content)){
+		var links = content.match(exhentaiREG);
+
+		for(var i = 0; i < links.length; i++){
+			exhentaiChannel.send(links[i]);
+		}
+
+		return;
+	}
+
+	if(pixivREG.test(content)){
+		var links = content.match(pixivREG);
+
+		for(var i = 0; i < links.length; i++){
+			pixivChannel.send(links[i]);
+		}
+
+		return;
+	}
+
+	if(twitterREG.test(content)){
+		var links = content.match(twitterREG);
+
+		for(var i = 0; i < links.length; i++){
+			twitterChannel.send(links[i]);
+		}
+
+		return;
+	}
 });
