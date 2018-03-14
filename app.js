@@ -29,12 +29,15 @@ client.on("message", message => {
 	var pixivREG = /https:\/\/www\.pixiv\.net\/member_illust\.php\?mode=medium&illust_id=[0-9]+/g;
 	// regex for twitter
 	var twitterREG = /https:\/\/twitter\.com\/[a-zA-z0-9]+\/status\/[0-9]+/g;
+	// regex for youtube
+	var youtubeREG = /https:\/\/www\.youtube\.com\/[0-9a-zA-Z\?=]+/;
 
 	
 	var exhentaiChannel = client.channels.get("423287490384887828");
 	var pixivChannel = client.channels.get("423287514049019906");
 	var twitterChannel = client.channels.get("423287551386976256");
 	var picChannel = client.channels.get("423287762314330162");
+	var youtubeChannel = client.channels.get("423344124423438336");
 
 
 	if(exhentaiREG.test(content)){
@@ -62,6 +65,16 @@ client.on("message", message => {
 
 		for(var i = 0; i < links.length; i++){
 			twitterChannel.send(links[i]);
+		}
+
+		return;
+	}
+
+	if(youtubeREG.test(content)){
+		var links = content.match(youtubeREG);
+
+		for(var i = 0; i < links.length; i++){
+			youtubeChannel.send(links[i]);
 		}
 
 		return;
