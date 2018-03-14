@@ -31,6 +31,8 @@ client.on("message", message => {
 	var twitterREG = /https:\/\/twitter\.com\/[a-zA-z0-9]+\/status\/[0-9]+/g;
 	// regex for youtube
 	var youtubeREG = /https:\/\/www\.youtube\.com\/[0-9a-zA-Z\?=]+/;
+	// regex for pics
+	var picREG = /[a-zA-Z0-9]+((\.jpg)|(\.jpeg)|(\.png)|(\.gif))/i;
 
 	
 	var exhentaiChannel = client.channels.get("423287490384887828");
@@ -38,7 +40,6 @@ client.on("message", message => {
 	var twitterChannel = client.channels.get("423287551386976256");
 	var picChannel = client.channels.get("423287762314330162");
 	var youtubeChannel = client.channels.get("423344124423438336");
-
 
 	if(exhentaiREG.test(content)){
 		var links = content.match(exhentaiREG);
@@ -78,5 +79,24 @@ client.on("message", message => {
 		}
 
 		return;
+	}
+
+	if(message.attachments.size > 0){
+		var pics = [];
+		var attachIt = message.attachments.values();
+		var attachValue = attachIt.next();
+		
+		while(!attachValue.done){
+			if(picREG.test(attachValue.value.filename)){
+				pics.push(attachValue.value.url);
+			}
+
+			attachValue = attachIt.next();
+		}
+
+
+		picChannel.send(message.author + " sent a picture: ", {files: pics});
+		
+		return ;
 	}
 });
