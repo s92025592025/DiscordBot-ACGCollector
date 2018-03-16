@@ -1,6 +1,6 @@
 # DiscordBot-ACGCollector
 ## Objective
-Collect likns from specific website by forwarding them to a designated channel.
+Collect links from specific websites by forwarding them to a designated channel.
 
 ## Necessary Files and Package
 Get `discord.js` by
