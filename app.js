@@ -33,6 +33,8 @@ client.on("message", message => {
 	var youtubeREG = /https:\/\/www\.youtube\.com\/[0-9a-zA-Z\?=]+/;
 	// regex for pics
 	var picREG = /[a-zA-Z0-9]+((\.jpg)|(\.jpeg)|(\.png)|(\.gif))/i;
+	// start of 18+ channel
+	var rainbowChannel = "431710252069814272";
 
 	
 	var exhentaiChannel = client.channels.get("423287490384887828");
@@ -40,6 +42,28 @@ client.on("message", message => {
 	var twitterChannel = client.channels.get("423287551386976256");
 	var picChannel = client.channels.get("423287762314330162");
 	var youtubeChannel = client.channels.get("423344124423438336");
+	var r18Channel = client.channels.get("433510456917753857");
+
+
+	if (message.channel.name == '彩虹頻道' && message.attachments.size > 0) {
+		var pics = [];
+		var attachIt = message.attachments.values();
+		var attachValue = attachIt.next();
+		
+		while(!attachValue.done){
+			if(picREG.test(attachValue.value.filename)){
+				pics.push(attachValue.value.url);
+			}
+
+			attachValue = attachIt.next();
+		}
+
+
+		r18Channel.send(message.author + " sent a picture: ", {files: pics});
+		
+		return ;
+	}
+
 
 	if(exhentaiREG.test(content)){
 		var links = content.match(exhentaiREG);
