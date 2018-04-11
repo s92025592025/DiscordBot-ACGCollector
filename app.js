@@ -45,7 +45,7 @@ client.on("message", message => {
 	var r18Channel = client.channels.get("433510456917753857");
 
 
-	if (message.channel.name == '彩虹頻道' && message.attachments.size > 0) {
+	if (message.channel.id == rainbowChannel && message.attachments.size > 0) {
 		var pics = [];
 		var attachIt = message.attachments.values();
 		var attachValue = attachIt.next();
